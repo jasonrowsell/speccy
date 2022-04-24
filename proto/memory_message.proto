@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package jasonrowsell.speccy;
+
+option go_package = "./;pb";
+
+message Memory {
+  enum Unit {
+    UNKNOWN = 0;
+    BYTES = 1;
+    KILOBYTES = 2;
+    MEGABYTES = 3;
+    GIGABYTES = 4;
+    TERABYTES = 5;
+  }
+
+  uint64 size = 1;
+  Unit unit = 2;
+}

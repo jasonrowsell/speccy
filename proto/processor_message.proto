@@ -1,6 +1,10 @@
 syntax = "proto3";
 
+package jasonrowsell.speccy;
+
 option go_package = "./;pb";
+
+import "memory_message.proto";
 
 message CPU {
   // Name of the CPU.
@@ -32,8 +36,8 @@ message GPU {
   uint32 bus_id = 2;
   // Device ID.
   uint32 device_id = 3;
-  // Memory size in MB.
-  uint32 memory_size = 4;
+  // Memory size.
+  Memory memory = 4;
   // GPU clock speed in MHz.
   uint32 clock_speed = 5;
   // Memory clock speed in MHz.
