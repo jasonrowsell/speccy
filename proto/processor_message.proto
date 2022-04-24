@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "./;pb";
+
 message CPU {
   // Name of the CPU.
   string name = 1;
@@ -33,7 +35,7 @@ message GPU {
   // Memory size in MB.
   uint32 memory_size = 4;
   // GPU clock speed in MHz.
-  uint32 clock_speed = 4;
+  uint32 clock_speed = 5;
   // Memory clock speed in MHz.
-  uint32 memory_clock_speed = 5;
+  uint32 memory_clock_speed = 6;
 }
