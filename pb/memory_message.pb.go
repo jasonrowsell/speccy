@@ -83,6 +83,7 @@ type Memory struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Size of the memory.
 	Size uint64      `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
 	Unit Memory_Unit `protobuf:"varint,2,opt,name=unit,proto3,enum=jasonrowsell.speccy.Memory_Unit" json:"unit,omitempty"`
 }
