@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message CPU {
+  // Name of the CPU.
+  string name = 1;
+  // Number of cores. 
+  uint32 cores = 2;
+  // Clock speed in MHz.
+  uint32 clock_speed = 3;
+  // Number of threads.
+  uint32 threads = 4;
+  // Socket type.
+  string socket = 5;
+  // Cache size in KB.
+  uint32 cache_size = 6;
+  // Number of cores per socket.
+  optional uint32 cores_per_socket = 7;
+  // Number of threads per core.
+  optional uint32 threads_per_core = 8;
+  // Number of threads per socket.
+  optional uint32 threads_per_socket = 9;
+  // Number of cores per package.
+  optional uint32 cores_per_package = 10; 
+}
+
+message GPU {
+  // Name of the GPU.
+  string name = 1;
+  // Bus ID.
+  uint32 bus_id = 2;
+  // Device ID.
+  uint32 device_id = 3;
+  // Memory size in MB.
+  uint32 memory_size = 4;
+  // GPU clock speed in MHz.
+  uint32 clock_speed = 4;
+  // Memory clock speed in MHz.
+  uint32 memory_clock_speed = 5;
+}
