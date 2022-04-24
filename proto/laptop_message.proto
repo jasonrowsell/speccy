@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package jasonrowsell.speccy;
+
+option go_package = "./;pb";
+
+import "processor_message.proto";
+import "memory_message.proto";
+import "storage_message.proto";
+import "screen_message.proto";
+import "keyboard_message.proto";
+import "google/protobuf/timestamp.proto";
+
+message Laptop {
+  string id = 1;
+  string name = 2;
+  CPU cpu = 3;
+  Memory ram = 4;
+  repeated GPU gpus = 5;
+  repeated Storage storage = 6;
+  Screen screen = 7;
+  Keyboard keyboard = 8;
+  oneof weight {
+    // Weight in grams
+    int32 weight_grams = 9;
+    // Weight in pounds
+    int32 weight_pounds = 10;
+  }
+  // Price in dollars
+  double price = 11;
+  uint32 release_year = 12;
+  google.protobuf.Timestamp release_date = 13;
+}
+
