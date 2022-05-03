@@ -19,14 +19,18 @@ message CPU {
   string socket = 5;
   // Cache size in KB.
   uint32 cache_size = 6;
+  // Minimum gHz.
+  double min_gHz = 7;
+  // Maximum gHz.
+  double max_gHz = 8;
   // Number of cores per socket.
-  optional uint32 cores_per_socket = 7;
+  optional uint32 cores_per_socket = 9;
   // Number of threads per core.
-  optional uint32 threads_per_core = 8;
+  optional uint32 threads_per_core = 10;
   // Number of threads per socket.
-  optional uint32 threads_per_socket = 9;
+  optional uint32 threads_per_socket = 11;
   // Number of cores per package.
-  optional uint32 cores_per_package = 10; 
+  optional uint32 cores_per_package = 12; 
 }
 
 message GPU {
