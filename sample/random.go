@@ -15,6 +15,31 @@ func randomKeyboardLayout() pb.Keyboard_Layout {
 	}
 }
 
-func randomBoolean() bool {
-	return randomInt(0, 1) == 1
+func randomCPUBrand() string {
+	if randomBoolean() {
+		return "AMD"
+	} else {
+		return "Intel"
+	}
+}
+
+func randomCPUName() string {
+	brand := randomCPUBrand()
+
+	if brand == "AMD" {
+		return randomStringFromArray(amdCPUNames)
+	} else {
+		return randomStringFromArray(intelCPUNames)
+	}
+}
+
+func randomSocket() string {
+	switch randomInt(0, 2) {
+	case 0:
+		return "LGA1151"
+	case 1:
+		return "LGA1155"
+	default:
+		return "LGA1151"
+	}
 }
