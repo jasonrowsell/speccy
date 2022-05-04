@@ -37,9 +37,9 @@ message GPU {
   // Name of the GPU.
   string name = 1;
   // Bus ID.
-  uint32 bus_id = 2;
+  string bus_id = 2;
   // Device ID.
-  uint32 device_id = 3;
+  string device_id = 3;
   // Memory size.
   Memory memory = 4;
   // GPU clock speed in MHz.
