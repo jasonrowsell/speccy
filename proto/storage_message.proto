@@ -10,8 +10,9 @@ message Storage {
   enum Driver {
     UNKNOWN = 0;
     MMC = 1;
-    SD = 2;
+    SSD = 2;
     USB = 3;
+    HDD = 4;
   }
 
   Driver driver = 1;
