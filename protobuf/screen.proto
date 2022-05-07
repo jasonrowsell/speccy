@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package jasonrowsell.speccy;
+package protobuf;
 
 option go_package = "./;pb";
 
