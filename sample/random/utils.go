@@ -1,9 +1,17 @@
 package random
 
-import "math/rand"
+import (
+	"math/rand"
+
+	"github.com/google/uuid"
+)
 
 func RandomInt(min, max int) int {
 	return min + rand.Intn(max-min)
+}
+
+func RandomFloat32(min, max float32) float32 {
+	return min + rand.Float32()*(max-min)
 }
 
 func RandomFloat64(min, max float64) float64 {
@@ -16,4 +24,8 @@ func RandomBoolean() bool {
 
 func RandomStringFromArray(array []string) string {
 	return array[RandomInt(0, len(array)-1)]
+}
+
+func GenerateUUID() string {
+	return uuid.New().String()
 }

@@ -3,6 +3,7 @@ package sample
 import (
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample/random"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func NewKeyboard() *pb.Keyboard {
@@ -36,8 +37,8 @@ func NewGPU() *pb.GPU {
 	busId := random.RandomBusID()
 	deviceId := random.RandomDeviceID()
 	memory := &pb.Memory{
-		Size: uint64(random.RandomInt(1, 4) * 1024),
-		Unit: random.RandomMemoryUnit(),
+		Size: uint64(random.RandomInt(2, 6)),
+		Unit: pb.Memory_GIGABYTES,
 	}
 
 	gpu := &pb.GPU{
@@ -49,4 +50,79 @@ func NewGPU() *pb.GPU {
 		MemoryClockSpeed: uint32(random.RandomInt(1, 4) * 1000),
 	}
 	return gpu
+}
+
+func NewRam() *pb.Memory {
+	ram := &pb.Memory{
+		Size: uint64(random.RandomInt(4, 64)),
+		Unit: pb.Memory_GIGABYTES,
+	}
+
+	return ram
+}
+
+func NewSSD() *pb.Storage {
+	ssd := &pb.Storage{
+		Driver: pb.Storage_SSD,
+		Memory: &pb.Memory{
+			Size: uint64(random.RandomInt(128, 1024)),
+			Unit: pb.Memory_GIGABYTES,
+		},
+	}
+
+	return ssd
+}
+
+func NewHDD() *pb.Storage {
+	hdd := &pb.Storage{
+		Driver: pb.Storage_HDD,
+		Memory: &pb.Memory{
+			Size: uint64(random.RandomInt(1, 6)),
+			Unit: pb.Memory_TERABYTES,
+		},
+	}
+
+	return hdd
+}
+
+func NewScreen() *pb.Screen {
+	height := uint32(random.RandomInt(1, 4))
+	width := height * 16 / 9
+
+	screen := &pb.Screen{
+		Resolution: &pb.Screen_Resolution{
+			Height: height,
+			Width:  width,
+		},
+		Size:           random.RandomFloat32(13, 17),
+		Type:           random.RandomScreenType(),
+		HasTouchscreen: random.RandomBoolean(),
+	}
+
+	return screen
+}
+
+func NewLaptop() *pb.Laptop {
+	id := random.GenerateUUID()
+	brand := random.RandomLaptopBrand()
+	name := random.RandomLaptopName(brand)
+
+	laptop := &pb.Laptop{
+		Id:       id,
+		Brand:    brand,
+		Name:     name,
+		Cpu:      NewCPU(),
+		Ram:      NewRam(),
+		Gpus:     []*pb.GPU{NewGPU()},
+		Storage:  []*pb.Storage{NewSSD(), NewHDD()},
+		Screen:   NewScreen(),
+		Keyboard: NewKeyboard(),
+		Weight: &pb.Laptop_WeightGrams{
+			WeightGrams: uint32(random.RandomInt(1, 4) * 1000),
+		},
+		Price:       random.RandomFloat64(100, 1000),
+		ReleaseDate: timestamppb.Now(),
+	}
+
+	return laptop
 }

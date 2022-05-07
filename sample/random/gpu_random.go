@@ -1,7 +1,6 @@
 package random
 
 import (
-	"github.com/google/uuid"
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample/constants"
 )
@@ -26,12 +25,12 @@ func RandomGPUName() string {
 }
 
 func RandomBusID() string {
-	id := uuid.New().String()
+	id := GenerateUUID()
 	return id[:8]
 }
 
 func RandomDeviceID() string {
-	id := uuid.New().String()
+	id := GenerateUUID()
 	return id[:12]
 }
 
