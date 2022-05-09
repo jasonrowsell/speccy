@@ -7,7 +7,7 @@ import (
 )
 
 func RandomInt(min, max int) int {
-	return min + rand.Intn(max-min)
+	return rand.Intn(max-min) + min
 }
 
 func RandomFloat32(min, max float32) float32 {

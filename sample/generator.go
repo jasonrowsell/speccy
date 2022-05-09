@@ -1,6 +1,8 @@
 package sample
 
 import (
+	"math"
+
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample/random"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -16,8 +18,8 @@ func NewKeyboard() *pb.Keyboard {
 
 func NewCPU() *pb.CPU {
 	name := random.RandomCPUName()
-	minGhz := random.RandomFloat64(1, 3)
-	maxGhz := random.RandomFloat64(minGhz, 5)
+	minGhz := math.Floor(random.RandomFloat64(1, 3)*10) / 10
+	maxGhz := math.Floor(random.RandomFloat64(minGhz, 5)*10) / 10
 
 	cpu := &pb.CPU{
 		Name:       name,
@@ -94,7 +96,7 @@ func NewScreen() *pb.Screen {
 			Height: height,
 			Width:  width,
 		},
-		Size:           random.RandomFloat32(13, 17),
+		Size:           math.Floor(random.RandomFloat64(13, 17)*100) / 100,
 		Type:           random.RandomScreenType(),
 		HasTouchscreen: random.RandomBoolean(),
 	}
@@ -120,7 +122,7 @@ func NewLaptop() *pb.Laptop {
 		Weight: &pb.Laptop_WeightGrams{
 			WeightGrams: uint32(random.RandomInt(1, 4) * 1000),
 		},
-		Price:       random.RandomFloat64(100, 1000),
+		Price:       math.Floor(random.RandomFloat64(100, 1000)*100) / 100,
 		ReleaseDate: timestamppb.Now(),
 	}
 
