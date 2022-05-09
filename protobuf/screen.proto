@@ -19,7 +19,7 @@ message Screen {
   }
 
   // Screen size in inches
-  float size = 1;
+  double size = 1;
   Resolution resolution = 2;
   ScreenType type = 3;
   bool has_touchscreen = 4;
