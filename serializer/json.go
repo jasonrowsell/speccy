@@ -6,7 +6,9 @@ import (
 )
 
 func ProtobufToJSON(message proto.Message) ([]byte, error) {
-	return protojson.Marshal(message)
+	return protojson.MarshalOptions{
+		Multiline: true,
+	}.Marshal(message)
 }
 
 func JSONToProtobuf(data []byte, message proto.Message) error {
