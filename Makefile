@@ -5,10 +5,10 @@ clean:
 	rm pb/*.go
 
 test-unit:
-	go test -v ./...
+	go test -race -v ./...
 
 test-coverage:
-	go test -v ./... -cover -coverprofile=coverage.out -covermode=atomic || exit 1
+	go test -race -v ./... -cover -coverprofile=coverage.out -covermode=atomic
 
 # Formats the coverage report to HTML.
 format-coverage:
