@@ -1,62 +1,62 @@
 {
-  "id":  "42bdf40e-7c36-4894-8abd-e9d562ce843e",
-  "brand":  "Apple",
-  "name":  "MacBook Pro",
-  "cpu":  {
-    "name":  "Intel Core i7-9700K",
-    "cores":  3,
-    "clockSpeed":  1000,
-    "threads":  1,
-    "socket":  "LGA1151",
-    "cacheSize":  2048,
-    "minGHz":  1.4,
-    "maxGHz":  2.5
+  "id": "43c6344d-f8d9-4717-9fdc-1c5016689a50",
+  "brand": "Microsoft",
+  "name": "Surface Pro",
+  "cpu": {
+    "name": "Intel Core i7-9750H",
+    "cores": 1,
+    "clockSpeed": 2000,
+    "threads": 3,
+    "socket": "LGA1155",
+    "cacheSize": 2048,
+    "minGHz": 1.2,
+    "maxGHz": 4.7
   },
-  "ram":  {
-    "size":  "12",
-    "unit":  "GIGABYTES"
+  "ram": {
+    "size": "22",
+    "unit": "GIGABYTES"
   },
-  "gpus":  [
+  "gpus": [
     {
-      "name":  "RX 580",
-      "busId":  "9cb799eb",
-      "deviceId":  "aaeeff87-d8c",
-      "memory":  {
-        "size":  "5",
-        "unit":  "GIGABYTES"
+      "name": "GeForce RTX 2080 Ti",
+      "busId": "81546081",
+      "deviceId": "dea4a056-79e",
+      "memory": {
+        "size": "3",
+        "unit": "GIGABYTES"
       },
-      "clockSpeed":  3000,
-      "memoryClockSpeed":  2000
+      "clockSpeed": 2000,
+      "memoryClockSpeed": 1000
     }
   ],
-  "storage":  [
+  "storage": [
     {
-      "driver":  "SSD",
-      "memory":  {
-        "size":  "744",
-        "unit":  "GIGABYTES"
+      "driver": "SSD",
+      "memory": {
+        "size": "458",
+        "unit": "GIGABYTES"
       }
     },
     {
-      "driver":  "HDD",
-      "memory":  {
-        "size":  "3",
-        "unit":  "TERABYTES"
+      "driver": "HDD",
+      "memory": {
+        "size": "4",
+        "unit": "TERABYTES"
       }
     }
   ],
-  "screen":  {
-    "size":  14.39,
-    "resolution":  {
-      "width":  5,
-      "height":  3
+  "screen": {
+    "size": 15.38,
+    "resolution": {
+      "width": 5,
+      "height": 3
     },
-    "type":  "LCD"
+    "type": "CRT"
   },
-  "keyboard":  {
-    "layout":  "QWERTZ"
+  "keyboard": {
+    "layout": "QWERTY"
   },
-  "weightGrams":  3000,
-  "price":  780.24,
-  "releaseDate":  "2022-05-10T19:27:46.704370Z"
+  "weightGrams": 3000,
+  "price": 654.27,
+  "releaseDate": "2022-05-10T19:43:36.347468Z"
 }
