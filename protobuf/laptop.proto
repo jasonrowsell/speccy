@@ -33,3 +33,14 @@ message Laptop {
   google.protobuf.Timestamp release_date = 14;
 }
 
+message CreateLaptopRequest {
+  Laptop laptop = 1;
+}
+
+message CreateLaptopResponse {
+  string id = 1;
+}
+
+service LaptopService {
+  rpc CreateLaptop(CreateLaptopRequest) returns (CreateLaptopResponse) {};
+}

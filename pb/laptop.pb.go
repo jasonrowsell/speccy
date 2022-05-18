@@ -7,6 +7,10 @@
 package pb
 
 import (
+	context "context"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -200,6 +204,100 @@ func (*Laptop_WeightGrams) isLaptop_Weight() {}
 
 func (*Laptop_WeightPounds) isLaptop_Weight() {}
 
+type CreateLaptopRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Laptop *Laptop `protobuf:"bytes,1,opt,name=laptop,proto3" json:"laptop,omitempty"`
+}
+
+func (x *CreateLaptopRequest) Reset() {
+	*x = CreateLaptopRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_laptop_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateLaptopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLaptopRequest) ProtoMessage() {}
+
+func (x *CreateLaptopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_laptop_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLaptopRequest.ProtoReflect.Descriptor instead.
+func (*CreateLaptopRequest) Descriptor() ([]byte, []int) {
+	return file_laptop_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateLaptopRequest) GetLaptop() *Laptop {
+	if x != nil {
+		return x.Laptop
+	}
+	return nil
+}
+
+type CreateLaptopResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *CreateLaptopResponse) Reset() {
+	*x = CreateLaptopResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_laptop_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateLaptopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLaptopResponse) ProtoMessage() {}
+
+func (x *CreateLaptopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_laptop_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLaptopResponse.ProtoReflect.Descriptor instead.
+func (*CreateLaptopResponse) Descriptor() ([]byte, []int) {
+	return file_laptop_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateLaptopResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 var File_laptop_proto protoreflect.FileDescriptor
 
 var file_laptop_proto_rawDesc = []byte{
@@ -243,8 +341,21 @@ var file_laptop_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
 	0x52, 0x0b, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x44, 0x61, 0x74, 0x65, 0x42, 0x08, 0x0a,
-	0x06, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2f, 0x3b, 0x70, 0x62,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x06, 0x77, 0x65, 0x69, 0x67, 0x68, 0x74, 0x22, 0x3f, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x28,
+	0x0a, 0x06, 0x6c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70,
+	0x52, 0x06, 0x6c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x22, 0x26, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x32, 0x60, 0x0a, 0x0d, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x4f, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f,
+	0x70, 0x12, 0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2f, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -259,30 +370,35 @@ func file_laptop_proto_rawDescGZIP() []byte {
 	return file_laptop_proto_rawDescData
 }
 
-var file_laptop_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_laptop_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_laptop_proto_goTypes = []interface{}{
 	(*Laptop)(nil),                // 0: protobuf.Laptop
-	(*CPU)(nil),                   // 1: protobuf.CPU
-	(*Memory)(nil),                // 2: protobuf.Memory
-	(*GPU)(nil),                   // 3: protobuf.GPU
-	(*Storage)(nil),               // 4: protobuf.Storage
-	(*Screen)(nil),                // 5: protobuf.Screen
-	(*Keyboard)(nil),              // 6: protobuf.Keyboard
-	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
+	(*CreateLaptopRequest)(nil),   // 1: protobuf.CreateLaptopRequest
+	(*CreateLaptopResponse)(nil),  // 2: protobuf.CreateLaptopResponse
+	(*CPU)(nil),                   // 3: protobuf.CPU
+	(*Memory)(nil),                // 4: protobuf.Memory
+	(*GPU)(nil),                   // 5: protobuf.GPU
+	(*Storage)(nil),               // 6: protobuf.Storage
+	(*Screen)(nil),                // 7: protobuf.Screen
+	(*Keyboard)(nil),              // 8: protobuf.Keyboard
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_laptop_proto_depIdxs = []int32{
-	1, // 0: protobuf.Laptop.cpu:type_name -> protobuf.CPU
-	2, // 1: protobuf.Laptop.ram:type_name -> protobuf.Memory
-	3, // 2: protobuf.Laptop.gpus:type_name -> protobuf.GPU
-	4, // 3: protobuf.Laptop.storage:type_name -> protobuf.Storage
-	5, // 4: protobuf.Laptop.screen:type_name -> protobuf.Screen
-	6, // 5: protobuf.Laptop.keyboard:type_name -> protobuf.Keyboard
-	7, // 6: protobuf.Laptop.release_date:type_name -> google.protobuf.Timestamp
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	3, // 0: protobuf.Laptop.cpu:type_name -> protobuf.CPU
+	4, // 1: protobuf.Laptop.ram:type_name -> protobuf.Memory
+	5, // 2: protobuf.Laptop.gpus:type_name -> protobuf.GPU
+	6, // 3: protobuf.Laptop.storage:type_name -> protobuf.Storage
+	7, // 4: protobuf.Laptop.screen:type_name -> protobuf.Screen
+	8, // 5: protobuf.Laptop.keyboard:type_name -> protobuf.Keyboard
+	9, // 6: protobuf.Laptop.release_date:type_name -> google.protobuf.Timestamp
+	0, // 7: protobuf.CreateLaptopRequest.laptop:type_name -> protobuf.Laptop
+	1, // 8: protobuf.LaptopService.CreateLaptop:input_type -> protobuf.CreateLaptopRequest
+	2, // 9: protobuf.LaptopService.CreateLaptop:output_type -> protobuf.CreateLaptopResponse
+	9, // [9:10] is the sub-list for method output_type
+	8, // [8:9] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_laptop_proto_init() }
@@ -308,6 +424,30 @@ func file_laptop_proto_init() {
 				return nil
 			}
 		}
+		file_laptop_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateLaptopRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_laptop_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateLaptopResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_laptop_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Laptop_WeightGrams)(nil),
@@ -319,9 +459,9 @@ func file_laptop_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_laptop_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_laptop_proto_goTypes,
 		DependencyIndexes: file_laptop_proto_depIdxs,
@@ -331,4 +471,84 @@ func file_laptop_proto_init() {
 	file_laptop_proto_rawDesc = nil
 	file_laptop_proto_goTypes = nil
 	file_laptop_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// LaptopServiceClient is the client API for LaptopService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type LaptopServiceClient interface {
+	CreateLaptop(ctx context.Context, in *CreateLaptopRequest, opts ...grpc.CallOption) (*CreateLaptopResponse, error)
+}
+
+type laptopServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewLaptopServiceClient(cc grpc.ClientConnInterface) LaptopServiceClient {
+	return &laptopServiceClient{cc}
+}
+
+func (c *laptopServiceClient) CreateLaptop(ctx context.Context, in *CreateLaptopRequest, opts ...grpc.CallOption) (*CreateLaptopResponse, error) {
+	out := new(CreateLaptopResponse)
+	err := c.cc.Invoke(ctx, "/protobuf.LaptopService/CreateLaptop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LaptopServiceServer is the server API for LaptopService service.
+type LaptopServiceServer interface {
+	CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error)
+}
+
+// UnimplementedLaptopServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedLaptopServiceServer struct {
+}
+
+func (*UnimplementedLaptopServiceServer) CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLaptop not implemented")
+}
+
+func RegisterLaptopServiceServer(s *grpc.Server, srv LaptopServiceServer) {
+	s.RegisterService(&_LaptopService_serviceDesc, srv)
+}
+
+func _LaptopService_CreateLaptop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLaptopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LaptopServiceServer).CreateLaptop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protobuf.LaptopService/CreateLaptop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LaptopServiceServer).CreateLaptop(ctx, req.(*CreateLaptopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _LaptopService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "protobuf.LaptopService",
+	HandlerType: (*LaptopServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateLaptop",
+			Handler:    _LaptopService_CreateLaptop_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "laptop.proto",
 }
