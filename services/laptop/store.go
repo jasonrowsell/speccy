@@ -29,7 +29,7 @@ func (store *InMemoryLaptopStore) SaveLaptop(laptop *pb.Laptop) error {
 	defer store.mutex.Unlock()
 
 	if store.store[laptop.Id] != nil {
-		return status.Errorf(codes.AlreadyExists, "laptop with ID %s already exists", laptop.Id)
+		return status.Errorf(codes.AlreadyExists, "laptop with ID: %s already exists", laptop.Id)
 	}
 
 	newLaptop := &pb.Laptop{}

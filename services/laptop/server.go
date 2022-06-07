@@ -14,8 +14,10 @@ type LaptopServer struct {
 	Store LaptopStore
 }
 
-func NewLaptopServer() *LaptopServer {
-	return &LaptopServer{}
+func NewLaptopServer(store LaptopStore) *LaptopServer {
+	return &LaptopServer{
+		Store: store,
+	}
 }
 
 // Unary RPC handler to create a new laptop and save it to the store
@@ -29,7 +31,9 @@ func (server *LaptopServer) CreateLaptop(
 	if len(laptop.GetId()) > 0 {
 		if err := validateLaptopId(laptop.GetId()); err != nil {
 			return nil, err
-		} else if err := assignLaptopId(laptop); err != nil {
+		}
+	} else {
+		if err := assignLaptopId(laptop); err != nil {
 			return nil, err
 		}
 	}
@@ -50,7 +54,7 @@ func (server *LaptopServer) CreateLaptop(
 func validateLaptopId(id string) error {
 	_, err := uuid.Parse(id)
 	if err != nil {
-		return status.Errorf(codes.InvalidArgument, "invalid ID: %v", err)
+		return status.Errorf(codes.InvalidArgument, "invalid ID: parsing \"%s\" failed: %v", id, err)
 	}
 	return nil
 }
@@ -70,12 +74,8 @@ func assignLaptopId(laptop *pb.Laptop) error {
 }
 
 func saveLaptop(store LaptopStore, laptop *pb.Laptop) error {
-	err := store.SaveLaptop(laptop)
-	if err != nil {
-		return status.Errorf(codes.Internal, "cannot save laptop: %v", err)
-	} else {
-		log.Printf("Created laptop with ID: %s", laptop.GetId())
+	if err := store.SaveLaptop(laptop); err != nil {
+		return err
 	}
-
 	return nil
 }
