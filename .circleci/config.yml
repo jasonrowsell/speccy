@@ -12,6 +12,8 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:11
+    parallelism: 4
+
     environment: # environment variables for the build itself
       TEST_RESULTS: /tmp/test-results # path to where test results will be saved
 
@@ -29,8 +31,6 @@ jobs:
           command: |
             PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
             gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
-
-      - run: make # pull and build dependencies for the project
 
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
