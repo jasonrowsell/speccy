@@ -4,7 +4,7 @@ gen:
 clean:
 	rm pb/*.go
 
-test-unit:
+test:
 	go test -race -v ./...
 
 test-coverage:
