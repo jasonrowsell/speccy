@@ -13,6 +13,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/status"
 )
 
 func TestLaptopClient_CreateLaptop(t *testing.T) {
@@ -41,6 +44,58 @@ func TestLaptopClient_CreateLaptop(t *testing.T) {
 		require.NoError(t, err)
 		assertSameLaptop(t, laptop, savedLaptop)
 	})
+
+	t.Run("should return an error if the laptop ID is invalid", func(t *testing.T) {
+		t.Parallel()
+
+		// given
+		laptopStore := service.NewInMemoryLaptopStore()
+		serverAddress := startServer(t, laptopStore)
+		laptopClient := newClient(t, serverAddress)
+
+		// when
+		laptop := sample.NewLaptop()
+		laptop.Id = "invalid"
+		request := &pb.CreateLaptopRequest{
+			Laptop: laptop,
+		}
+
+		_, err := laptopClient.CreateLaptop(context.Background(), request)
+
+		// then
+		require.Error(t, err)
+		assert.Equal(t, codes.InvalidArgument, status.Code(err))
+	})
+
+	t.Run("should return an error if the laptop already exists", func(t *testing.T) {
+		t.Parallel()
+
+		// given
+		laptopStore := service.NewInMemoryLaptopStore()
+		serverAddress := startServer(t, laptopStore)
+		laptopClient := newClient(t, serverAddress)
+
+		// when we create a laptop
+		laptop := sample.NewLaptop()
+		request := &pb.CreateLaptopRequest{
+			Laptop: laptop,
+		}
+
+		_, err := laptopClient.CreateLaptop(context.Background(), request)
+		require.NoError(t, err)
+
+		// when we try to create a laptop with the same ID
+		_, err = laptopClient.CreateLaptop(context.Background(), request)
+
+		// then
+		require.Error(t, err)
+		assert.Equal(t, codes.AlreadyExists, status.Code(err))
+
+		// and
+		savedLaptop, err := laptopStore.FindLaptop(laptop.Id)
+		require.NoError(t, err)
+		assertSameLaptop(t, laptop, savedLaptop)
+	})
 }
 
 func startServer(t *testing.T, laptopStore service.LaptopStore) string {
@@ -60,7 +115,7 @@ func startServer(t *testing.T, laptopStore service.LaptopStore) string {
 }
 
 func newClient(t *testing.T, address string) pb.LaptopServiceClient {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	require.NoError(t, err)
 
 	log.Println("client connected to:", address)
