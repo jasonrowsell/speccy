@@ -26,7 +26,7 @@ func (server *LaptopServer) CreateLaptop(
 	request *pb.CreateLaptopRequest,
 ) (*pb.CreateLaptopResponse, error) {
 	laptop := request.GetLaptop()
-	log.Printf("CreateLaptop with ID: %s", laptop.GetId())
+	log.Printf("CreateLaptop: %v", laptop)
 
 	if len(laptop.GetId()) > 0 {
 		if err := validateLaptopId(laptop.GetId()); err != nil {
@@ -41,7 +41,7 @@ func (server *LaptopServer) CreateLaptop(
 	if err := saveLaptop(server.Store, laptop); err != nil {
 		return nil, err
 	} else {
-		log.Printf("Created laptop with ID: %s", laptop.GetId())
+		log.Printf("Saved laptop with ID: %s", laptop.GetId())
 	}
 
 	res := &pb.CreateLaptopResponse{
