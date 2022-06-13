@@ -4,12 +4,15 @@ import (
 	"context"
 	"flag"
 	"log"
+	"time"
 
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
+
+const timeout = 500 * time.Millisecond
 
 func main() {
 	serverAddress := flag.String("server", "", "server address")
@@ -27,10 +30,14 @@ func main() {
 	laptopClient := pb.NewLaptopServiceClient(conn)
 
 	laptop := sample.NewLaptop()
-
-	response, err := laptopClient.CreateLaptop(context.Background(), &pb.CreateLaptopRequest{
+	request := &pb.CreateLaptopRequest{
 		Laptop: laptop,
-	})
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	response, err := laptopClient.CreateLaptop(ctx, request)
 
 	if err != nil {
 		log.Fatal("cannot create laptop: ", err)

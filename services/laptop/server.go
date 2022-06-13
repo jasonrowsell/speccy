@@ -38,6 +38,10 @@ func (server *LaptopServer) CreateLaptop(
 		}
 	}
 
+	if err := contextError(context); err != nil {
+		return nil, err
+	}
+
 	if err := saveLaptop(server.Store, laptop); err != nil {
 		return nil, err
 	} else {
@@ -78,4 +82,15 @@ func saveLaptop(store LaptopStore, laptop *pb.Laptop) error {
 		return err
 	}
 	return nil
+}
+
+func contextError(ctx context.Context) error {
+	switch ctx.Err() {
+	case context.Canceled:
+		return status.Errorf(codes.Canceled, "request cancelled")
+	case context.DeadlineExceeded:
+		return status.Errorf(codes.DeadlineExceeded, "request timed out")
+	default:
+		return nil
+	}
 }
