@@ -5,29 +5,30 @@ import (
 
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample/random"
+	"github.com/jasonrowsell/speccy/utils"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func NewKeyboard() *pb.Keyboard {
 	keyboard := &pb.Keyboard{
 		Layout:    random.RandomKeyboardLayout(),
-		Backlight: random.RandomBoolean(),
+		Backlight: utils.RandomBoolean(),
 	}
 	return keyboard
 }
 
 func NewCPU() *pb.CPU {
 	name := random.RandomCPUName()
-	minGhz := math.Floor(random.RandomFloat64(1, 3)*10) / 10
-	maxGhz := math.Floor(random.RandomFloat64(minGhz, 5)*10) / 10
+	minGhz := math.Floor(utils.RandomFloat64(1, 3)*10) / 10
+	maxGhz := math.Floor(utils.RandomFloat64(minGhz, 5)*10) / 10
 
 	cpu := &pb.CPU{
 		Name:       name,
-		Cores:      uint32(random.RandomInt(1, 4)),
-		ClockSpeed: uint32(random.RandomInt(1, 4) * 1000),
-		Threads:    uint32(random.RandomInt(1, 4)),
+		Cores:      uint32(utils.RandomInt(1, 4)),
+		ClockSpeed: uint32(utils.RandomInt(1, 4) * 1000),
+		Threads:    uint32(utils.RandomInt(1, 4)),
 		Socket:     random.RandomSocket(),
-		CacheSize:  uint32(random.RandomInt(1, 4) * 1024),
+		CacheSize:  uint32(utils.RandomInt(1, 4) * 1024),
 		MinGHz:     minGhz,
 		MaxGHz:     maxGhz,
 	}
@@ -39,7 +40,7 @@ func NewGPU() *pb.GPU {
 	busId := random.RandomBusID()
 	deviceId := random.RandomDeviceID()
 	memory := &pb.Memory{
-		Size: uint64(random.RandomInt(2, 6)),
+		Size: uint64(utils.RandomInt(2, 6)),
 		Unit: pb.Memory_GIGABYTES,
 	}
 
@@ -48,15 +49,15 @@ func NewGPU() *pb.GPU {
 		BusId:            busId,
 		DeviceId:         deviceId,
 		Memory:           memory,
-		ClockSpeed:       uint32(random.RandomInt(1, 4) * 1000),
-		MemoryClockSpeed: uint32(random.RandomInt(1, 4) * 1000),
+		ClockSpeed:       uint32(utils.RandomInt(1, 4) * 1000),
+		MemoryClockSpeed: uint32(utils.RandomInt(1, 4) * 1000),
 	}
 	return gpu
 }
 
 func NewRam() *pb.Memory {
 	ram := &pb.Memory{
-		Size: uint64(random.RandomInt(4, 64)),
+		Size: uint64(utils.RandomInt(4, 64)),
 		Unit: pb.Memory_GIGABYTES,
 	}
 
@@ -67,7 +68,7 @@ func NewSSD() *pb.Storage {
 	ssd := &pb.Storage{
 		Driver: pb.Storage_SSD,
 		Memory: &pb.Memory{
-			Size: uint64(random.RandomInt(128, 1024)),
+			Size: uint64(utils.RandomInt(128, 1024)),
 			Unit: pb.Memory_GIGABYTES,
 		},
 	}
@@ -79,7 +80,7 @@ func NewHDD() *pb.Storage {
 	hdd := &pb.Storage{
 		Driver: pb.Storage_HDD,
 		Memory: &pb.Memory{
-			Size: uint64(random.RandomInt(1, 6)),
+			Size: uint64(utils.RandomInt(1, 6)),
 			Unit: pb.Memory_TERABYTES,
 		},
 	}
@@ -88,7 +89,7 @@ func NewHDD() *pb.Storage {
 }
 
 func NewScreen() *pb.Screen {
-	height := uint32(random.RandomInt(1, 4))
+	height := uint32(utils.RandomInt(1, 4))
 	width := height * 16 / 9
 
 	screen := &pb.Screen{
@@ -96,16 +97,16 @@ func NewScreen() *pb.Screen {
 			Height: height,
 			Width:  width,
 		},
-		Size:           math.Floor(random.RandomFloat64(13, 17)*100) / 100,
+		Size:           math.Floor(utils.RandomFloat64(13, 17)*100) / 100,
 		Type:           random.RandomScreenType(),
-		HasTouchscreen: random.RandomBoolean(),
+		HasTouchscreen: utils.RandomBoolean(),
 	}
 
 	return screen
 }
 
 func NewLaptop() *pb.Laptop {
-	id := random.GenerateUUID()
+	id := utils.GenerateUUID()
 	brand := random.RandomLaptopBrand()
 	name := random.RandomLaptopName(brand)
 
@@ -120,9 +121,9 @@ func NewLaptop() *pb.Laptop {
 		Screen:   NewScreen(),
 		Keyboard: NewKeyboard(),
 		Weight: &pb.Laptop_WeightGrams{
-			WeightGrams: uint32(random.RandomInt(1, 4) * 1000),
+			WeightGrams: uint32(utils.RandomInt(1, 4) * 1000),
 		},
-		Price:       math.Floor(random.RandomFloat64(100, 1000)*100) / 100,
+		Price:       math.Floor(utils.RandomFloat64(100, 1000)*100) / 100,
 		ReleaseDate: timestamppb.Now(),
 	}
 

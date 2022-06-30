@@ -2,27 +2,28 @@ package random
 
 import (
 	"github.com/jasonrowsell/speccy/sample/constants"
+	"github.com/jasonrowsell/speccy/utils"
 )
 
 func RandomLaptopBrand() string {
-	return RandomStringFromArray(constants.LaptopBrands)
+	return utils.RandomStringFromArray(constants.LaptopBrands)
 }
 
 func RandomLaptopName(brand string) string {
 	switch brand {
 	case "Apple":
-		return RandomStringFromArray(constants.AppleLaptopNames)
+		return utils.RandomStringFromArray(constants.AppleLaptopNames)
 	case "Dell":
-		return RandomStringFromArray(constants.DellLaptopNames)
+		return utils.RandomStringFromArray(constants.DellLaptopNames)
 	case "HP":
-		return RandomStringFromArray(constants.HpLaptopNames)
+		return utils.RandomStringFromArray(constants.HpLaptopNames)
 	case "Lenovo":
-		return RandomStringFromArray(constants.LenovoLaptopNames)
+		return utils.RandomStringFromArray(constants.LenovoLaptopNames)
 	case "Microsoft":
-		return RandomStringFromArray(constants.MicrosoftLaptopNames)
+		return utils.RandomStringFromArray(constants.MicrosoftLaptopNames)
 	case "Samsung":
-		return RandomStringFromArray(constants.SamsungLaptopNames)
+		return utils.RandomStringFromArray(constants.SamsungLaptopNames)
 	default:
-		return RandomStringFromArray(constants.AppleLaptopNames)
+		return utils.RandomStringFromArray(constants.AppleLaptopNames)
 	}
 }

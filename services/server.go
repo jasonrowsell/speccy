@@ -6,17 +6,23 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jasonrowsell/speccy/pb"
+	"github.com/jasonrowsell/speccy/utils"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type LaptopServer struct {
-	Store LaptopStore
+	LaptopStore LaptopStore
+	ImageStore  ImageStore
 }
 
-func NewLaptopServer(store LaptopStore) *LaptopServer {
+func NewLaptopServer(
+	laptopStore LaptopStore,
+	imageStore ImageStore,
+) *LaptopServer {
 	return &LaptopServer{
-		Store: store,
+		LaptopStore: laptopStore,
+		ImageStore:  imageStore,
 	}
 }
 
@@ -29,7 +35,7 @@ func (server *LaptopServer) CreateLaptop(
 	log.Printf("CreateLaptop: %v", laptop)
 
 	if len(laptop.GetId()) > 0 {
-		if err := validateLaptopId(laptop.GetId()); err != nil {
+		if err := utils.ValidateLaptopId(laptop.GetId()); err != nil {
 			return nil, err
 		}
 	} else {
@@ -42,7 +48,7 @@ func (server *LaptopServer) CreateLaptop(
 		return nil, err
 	}
 
-	if err := saveLaptop(server.Store, laptop); err != nil {
+	if err := saveLaptop(server.LaptopStore, laptop); err != nil {
 		return nil, err
 	} else {
 		log.Printf("Saved laptop with ID: %s", laptop.GetId())
@@ -53,14 +59,6 @@ func (server *LaptopServer) CreateLaptop(
 	}
 
 	return res, nil
-}
-
-func validateLaptopId(id string) error {
-	_, err := uuid.Parse(id)
-	if err != nil {
-		return status.Errorf(codes.InvalidArgument, "invalid ID: parsing \"%s\" failed: %v", id, err)
-	}
-	return nil
 }
 
 func assignLaptopId(laptop *pb.Laptop) error {
@@ -93,4 +91,12 @@ func contextError(ctx context.Context) error {
 	default:
 		return nil
 	}
+}
+
+// Client-streaming RPC handler to upload a laptop image
+func (server *LaptopServer) UploadLaptopImage(
+	stream pb.LaptopService_UploadLaptopImageServer,
+) error {
+	log.Printf("UploadLaptopImage: %v", stream)
+	return nil
 }

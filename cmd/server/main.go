@@ -7,7 +7,7 @@ import (
 	"net"
 
 	"github.com/jasonrowsell/speccy/pb"
-	service "github.com/jasonrowsell/speccy/services/laptop"
+	service "github.com/jasonrowsell/speccy/services"
 	"google.golang.org/grpc"
 )
 
@@ -17,7 +17,8 @@ func main() {
 	log.Println("server listening on port", *port)
 
 	laptopStore := service.NewInMemoryLaptopStore()
-	laptopServer := service.NewLaptopServer(laptopStore)
+	imageStore := service.NewDiskImageStore("img")
+	laptopServer := service.NewLaptopServer(laptopStore, imageStore)
 
 	grpcServer := grpc.NewServer()
 

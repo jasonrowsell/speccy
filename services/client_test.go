@@ -9,7 +9,7 @@ import (
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample"
 	"github.com/jasonrowsell/speccy/serializer"
-	service "github.com/jasonrowsell/speccy/services/laptop"
+	service "github.com/jasonrowsell/speccy/services"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
@@ -24,7 +24,7 @@ func TestLaptopClient_CreateLaptop(t *testing.T) {
 
 		// given
 		laptopStore := service.NewInMemoryLaptopStore()
-		serverAddress := startServer(t, laptopStore)
+		serverAddress := startServer(t, laptopStore, nil)
 		laptopClient := newClient(t, serverAddress)
 
 		// when
@@ -50,7 +50,7 @@ func TestLaptopClient_CreateLaptop(t *testing.T) {
 
 		// given
 		laptopStore := service.NewInMemoryLaptopStore()
-		serverAddress := startServer(t, laptopStore)
+		serverAddress := startServer(t, laptopStore, nil)
 		laptopClient := newClient(t, serverAddress)
 
 		// when
@@ -72,7 +72,7 @@ func TestLaptopClient_CreateLaptop(t *testing.T) {
 
 		// given
 		laptopStore := service.NewInMemoryLaptopStore()
-		serverAddress := startServer(t, laptopStore)
+		serverAddress := startServer(t, laptopStore, nil)
 		laptopClient := newClient(t, serverAddress)
 
 		// when we create a laptop
@@ -98,8 +98,8 @@ func TestLaptopClient_CreateLaptop(t *testing.T) {
 	})
 }
 
-func startServer(t *testing.T, laptopStore service.LaptopStore) string {
-	laptopServer := service.NewLaptopServer(laptopStore)
+func startServer(t *testing.T, laptopStore service.LaptopStore, imageStore service.ImageStore) string {
+	laptopServer := service.NewLaptopServer(laptopStore, imageStore)
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterLaptopServiceServer(grpcServer, laptopServer)

@@ -6,7 +6,7 @@ import (
 
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample"
-	service "github.com/jasonrowsell/speccy/services/laptop"
+	service "github.com/jasonrowsell/speccy/services"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
@@ -18,8 +18,8 @@ func TestLaptopServer_CreateLaptop(t *testing.T) {
 		t.Parallel()
 		// given
 		laptop := sample.NewLaptop()
-		store := service.NewInMemoryLaptopStore()
-		server := service.NewLaptopServer(store)
+		laptopStore := service.NewInMemoryLaptopStore()
+		server := service.NewLaptopServer(laptopStore, nil)
 
 		// when
 		request := &pb.CreateLaptopRequest{
@@ -38,7 +38,7 @@ func TestLaptopServer_CreateLaptop(t *testing.T) {
 		// given
 		laptop := sample.NewLaptop()
 		store := service.NewInMemoryLaptopStore()
-		server := service.NewLaptopServer(store)
+		server := service.NewLaptopServer(store, nil)
 		store.SaveLaptop(laptop)
 
 		// when
@@ -60,7 +60,7 @@ func TestLaptopServer_CreateLaptop(t *testing.T) {
 		laptop := sample.NewLaptop()
 		laptop.Id = "invalid"
 		store := service.NewInMemoryLaptopStore()
-		server := service.NewLaptopServer(store)
+		server := service.NewLaptopServer(store, nil)
 
 		// when
 		request := &pb.CreateLaptopRequest{
@@ -82,7 +82,7 @@ func TestLaptopServer_CreateLaptop(t *testing.T) {
 		laptop := sample.NewLaptop()
 		laptop.Id = emptyID
 		store := service.NewInMemoryLaptopStore()
-		server := service.NewLaptopServer(store)
+		server := service.NewLaptopServer(store, nil)
 
 		// when
 		request := &pb.CreateLaptopRequest{

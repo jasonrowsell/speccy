@@ -3,10 +3,11 @@ package random
 import (
 	"github.com/jasonrowsell/speccy/pb"
 	"github.com/jasonrowsell/speccy/sample/constants"
+	"github.com/jasonrowsell/speccy/utils"
 )
 
 func randomGPUBrand() string {
-	return RandomStringFromArray(constants.GPUBrands)
+	return utils.RandomStringFromArray(constants.GPUBrands)
 }
 
 func RandomGPUName() string {
@@ -14,26 +15,26 @@ func RandomGPUName() string {
 
 	switch brand {
 	case "Nvidia":
-		return RandomStringFromArray(constants.NvidiaGPUNames)
+		return utils.RandomStringFromArray(constants.NvidiaGPUNames)
 	case "AMD":
-		return RandomStringFromArray(constants.AmdGPUNames)
+		return utils.RandomStringFromArray(constants.AmdGPUNames)
 	case "Intel":
-		return RandomStringFromArray(constants.IntelGPUNames)
+		return utils.RandomStringFromArray(constants.IntelGPUNames)
 	default:
-		return RandomStringFromArray(constants.NvidiaGPUNames)
+		return utils.RandomStringFromArray(constants.NvidiaGPUNames)
 	}
 }
 
 func RandomBusID() string {
-	id := GenerateUUID()
+	id := utils.GenerateUUID()
 	return id[:8]
 }
 
 func RandomDeviceID() string {
-	id := GenerateUUID()
+	id := utils.GenerateUUID()
 	return id[:12]
 }
 
 func RandomMemoryUnit() pb.Memory_Unit {
-	return constants.MemoryUnits[RandomInt(0, len(constants.MemoryUnits)-1)]
+	return constants.MemoryUnits[utils.RandomInt(0, len(constants.MemoryUnits)-1)]
 }
