@@ -41,6 +41,27 @@ message CreateLaptopResponse {
   string id = 1;
 }
 
+message ImageData {
+  string id = 1;
+  // Format of the image, e.g. "png", "jpeg"
+  string format = 2;
+}
+
+message UploadImageRequest {
+  oneof data {
+    ImageData image_data = 1;
+    bytes chunk_data = 2;
+  }
+}
+
+message UploadImageResponse {
+  string id = 1;
+  // Size of the image in bytes
+  uint32 size = 2;
+}
+
 service LaptopService {
   rpc CreateLaptop(CreateLaptopRequest) returns (CreateLaptopResponse) {};
+
+  rpc UploadLaptopImage(stream UploadImageRequest) returns (UploadImageResponse) {};
 }

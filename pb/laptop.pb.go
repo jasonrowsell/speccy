@@ -298,6 +298,198 @@ func (x *CreateLaptopResponse) GetId() string {
 	return ""
 }
 
+type ImageData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Format of the image, e.g. "png", "jpeg"
+	Format string `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
+}
+
+func (x *ImageData) Reset() {
+	*x = ImageData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_laptop_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ImageData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImageData) ProtoMessage() {}
+
+func (x *ImageData) ProtoReflect() protoreflect.Message {
+	mi := &file_laptop_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImageData.ProtoReflect.Descriptor instead.
+func (*ImageData) Descriptor() ([]byte, []int) {
+	return file_laptop_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ImageData) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ImageData) GetFormat() string {
+	if x != nil {
+		return x.Format
+	}
+	return ""
+}
+
+type UploadImageRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Data:
+	//	*UploadImageRequest_ImageData
+	//	*UploadImageRequest_ChunkData
+	Data isUploadImageRequest_Data `protobuf_oneof:"data"`
+}
+
+func (x *UploadImageRequest) Reset() {
+	*x = UploadImageRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_laptop_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UploadImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadImageRequest) ProtoMessage() {}
+
+func (x *UploadImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_laptop_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadImageRequest.ProtoReflect.Descriptor instead.
+func (*UploadImageRequest) Descriptor() ([]byte, []int) {
+	return file_laptop_proto_rawDescGZIP(), []int{4}
+}
+
+func (m *UploadImageRequest) GetData() isUploadImageRequest_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (x *UploadImageRequest) GetImageData() *ImageData {
+	if x, ok := x.GetData().(*UploadImageRequest_ImageData); ok {
+		return x.ImageData
+	}
+	return nil
+}
+
+func (x *UploadImageRequest) GetChunkData() []byte {
+	if x, ok := x.GetData().(*UploadImageRequest_ChunkData); ok {
+		return x.ChunkData
+	}
+	return nil
+}
+
+type isUploadImageRequest_Data interface {
+	isUploadImageRequest_Data()
+}
+
+type UploadImageRequest_ImageData struct {
+	ImageData *ImageData `protobuf:"bytes,1,opt,name=image_data,json=imageData,proto3,oneof"`
+}
+
+type UploadImageRequest_ChunkData struct {
+	ChunkData []byte `protobuf:"bytes,2,opt,name=chunk_data,json=chunkData,proto3,oneof"`
+}
+
+func (*UploadImageRequest_ImageData) isUploadImageRequest_Data() {}
+
+func (*UploadImageRequest_ChunkData) isUploadImageRequest_Data() {}
+
+type UploadImageResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Size of the image in bytes
+	Size uint32 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+}
+
+func (x *UploadImageResponse) Reset() {
+	*x = UploadImageResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_laptop_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UploadImageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadImageResponse) ProtoMessage() {}
+
+func (x *UploadImageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_laptop_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadImageResponse.ProtoReflect.Descriptor instead.
+func (*UploadImageResponse) Descriptor() ([]byte, []int) {
+	return file_laptop_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UploadImageResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UploadImageResponse) GetSize() uint32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
 var File_laptop_proto protoreflect.FileDescriptor
 
 var file_laptop_proto_rawDesc = []byte{
@@ -348,14 +540,33 @@ var file_laptop_proto_rawDesc = []byte{
 	0x52, 0x06, 0x6c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x22, 0x26, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
-	0x32, 0x60, 0x0a, 0x0d, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x12, 0x4f, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f,
-	0x70, 0x12, 0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x00, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2f, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x22, 0x33, 0x0a, 0x09, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x16, 0x0a,
+	0x06, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x66,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x22, 0x73, 0x0a, 0x12, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x49,
+	0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x34, 0x0a, 0x0a, 0x69,
+	0x6d, 0x61, 0x67, 0x65, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6d, 0x61, 0x67, 0x65,
+	0x44, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x09, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74,
+	0x61, 0x12, 0x1f, 0x0a, 0x0a, 0x63, 0x68, 0x75, 0x6e, 0x6b, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0c, 0x48, 0x00, 0x52, 0x09, 0x63, 0x68, 0x75, 0x6e, 0x6b, 0x44, 0x61,
+	0x74, 0x61, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x39, 0x0a, 0x13, 0x55, 0x70,
+	0x6c, 0x6f, 0x61, 0x64, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x04, 0x73, 0x69, 0x7a, 0x65, 0x32, 0xb6, 0x01, 0x0a, 0x0d, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x4f, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x12, 0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x54, 0x0a, 0x11, 0x55, 0x70, 0x6c, 0x6f,
+	0x61, 0x64, 0x4c, 0x61, 0x70, 0x74, 0x6f, 0x70, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x1c, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x49,
+	0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x49, 0x6d, 0x61,
+	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x28, 0x01, 0x42, 0x07,
+	0x5a, 0x05, 0x2e, 0x2f, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -370,35 +581,41 @@ func file_laptop_proto_rawDescGZIP() []byte {
 	return file_laptop_proto_rawDescData
 }
 
-var file_laptop_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_laptop_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_laptop_proto_goTypes = []interface{}{
 	(*Laptop)(nil),                // 0: protobuf.Laptop
 	(*CreateLaptopRequest)(nil),   // 1: protobuf.CreateLaptopRequest
 	(*CreateLaptopResponse)(nil),  // 2: protobuf.CreateLaptopResponse
-	(*CPU)(nil),                   // 3: protobuf.CPU
-	(*Memory)(nil),                // 4: protobuf.Memory
-	(*GPU)(nil),                   // 5: protobuf.GPU
-	(*Storage)(nil),               // 6: protobuf.Storage
-	(*Screen)(nil),                // 7: protobuf.Screen
-	(*Keyboard)(nil),              // 8: protobuf.Keyboard
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(*ImageData)(nil),             // 3: protobuf.ImageData
+	(*UploadImageRequest)(nil),    // 4: protobuf.UploadImageRequest
+	(*UploadImageResponse)(nil),   // 5: protobuf.UploadImageResponse
+	(*CPU)(nil),                   // 6: protobuf.CPU
+	(*Memory)(nil),                // 7: protobuf.Memory
+	(*GPU)(nil),                   // 8: protobuf.GPU
+	(*Storage)(nil),               // 9: protobuf.Storage
+	(*Screen)(nil),                // 10: protobuf.Screen
+	(*Keyboard)(nil),              // 11: protobuf.Keyboard
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_laptop_proto_depIdxs = []int32{
-	3, // 0: protobuf.Laptop.cpu:type_name -> protobuf.CPU
-	4, // 1: protobuf.Laptop.ram:type_name -> protobuf.Memory
-	5, // 2: protobuf.Laptop.gpus:type_name -> protobuf.GPU
-	6, // 3: protobuf.Laptop.storage:type_name -> protobuf.Storage
-	7, // 4: protobuf.Laptop.screen:type_name -> protobuf.Screen
-	8, // 5: protobuf.Laptop.keyboard:type_name -> protobuf.Keyboard
-	9, // 6: protobuf.Laptop.release_date:type_name -> google.protobuf.Timestamp
-	0, // 7: protobuf.CreateLaptopRequest.laptop:type_name -> protobuf.Laptop
-	1, // 8: protobuf.LaptopService.CreateLaptop:input_type -> protobuf.CreateLaptopRequest
-	2, // 9: protobuf.LaptopService.CreateLaptop:output_type -> protobuf.CreateLaptopResponse
-	9, // [9:10] is the sub-list for method output_type
-	8, // [8:9] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	6,  // 0: protobuf.Laptop.cpu:type_name -> protobuf.CPU
+	7,  // 1: protobuf.Laptop.ram:type_name -> protobuf.Memory
+	8,  // 2: protobuf.Laptop.gpus:type_name -> protobuf.GPU
+	9,  // 3: protobuf.Laptop.storage:type_name -> protobuf.Storage
+	10, // 4: protobuf.Laptop.screen:type_name -> protobuf.Screen
+	11, // 5: protobuf.Laptop.keyboard:type_name -> protobuf.Keyboard
+	12, // 6: protobuf.Laptop.release_date:type_name -> google.protobuf.Timestamp
+	0,  // 7: protobuf.CreateLaptopRequest.laptop:type_name -> protobuf.Laptop
+	3,  // 8: protobuf.UploadImageRequest.image_data:type_name -> protobuf.ImageData
+	1,  // 9: protobuf.LaptopService.CreateLaptop:input_type -> protobuf.CreateLaptopRequest
+	4,  // 10: protobuf.LaptopService.UploadLaptopImage:input_type -> protobuf.UploadImageRequest
+	2,  // 11: protobuf.LaptopService.CreateLaptop:output_type -> protobuf.CreateLaptopResponse
+	5,  // 12: protobuf.LaptopService.UploadLaptopImage:output_type -> protobuf.UploadImageResponse
+	11, // [11:13] is the sub-list for method output_type
+	9,  // [9:11] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_laptop_proto_init() }
@@ -448,10 +665,50 @@ func file_laptop_proto_init() {
 				return nil
 			}
 		}
+		file_laptop_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ImageData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_laptop_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UploadImageRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_laptop_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UploadImageResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_laptop_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Laptop_WeightGrams)(nil),
 		(*Laptop_WeightPounds)(nil),
+	}
+	file_laptop_proto_msgTypes[4].OneofWrappers = []interface{}{
+		(*UploadImageRequest_ImageData)(nil),
+		(*UploadImageRequest_ChunkData)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -459,7 +716,7 @@ func file_laptop_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_laptop_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -486,6 +743,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LaptopServiceClient interface {
 	CreateLaptop(ctx context.Context, in *CreateLaptopRequest, opts ...grpc.CallOption) (*CreateLaptopResponse, error)
+	UploadLaptopImage(ctx context.Context, opts ...grpc.CallOption) (LaptopService_UploadLaptopImageClient, error)
 }
 
 type laptopServiceClient struct {
@@ -505,9 +763,44 @@ func (c *laptopServiceClient) CreateLaptop(ctx context.Context, in *CreateLaptop
 	return out, nil
 }
 
+func (c *laptopServiceClient) UploadLaptopImage(ctx context.Context, opts ...grpc.CallOption) (LaptopService_UploadLaptopImageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_LaptopService_serviceDesc.Streams[0], "/protobuf.LaptopService/UploadLaptopImage", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &laptopServiceUploadLaptopImageClient{stream}
+	return x, nil
+}
+
+type LaptopService_UploadLaptopImageClient interface {
+	Send(*UploadImageRequest) error
+	CloseAndRecv() (*UploadImageResponse, error)
+	grpc.ClientStream
+}
+
+type laptopServiceUploadLaptopImageClient struct {
+	grpc.ClientStream
+}
+
+func (x *laptopServiceUploadLaptopImageClient) Send(m *UploadImageRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *laptopServiceUploadLaptopImageClient) CloseAndRecv() (*UploadImageResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(UploadImageResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // LaptopServiceServer is the server API for LaptopService service.
 type LaptopServiceServer interface {
 	CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error)
+	UploadLaptopImage(LaptopService_UploadLaptopImageServer) error
 }
 
 // UnimplementedLaptopServiceServer can be embedded to have forward compatible implementations.
@@ -516,6 +809,9 @@ type UnimplementedLaptopServiceServer struct {
 
 func (*UnimplementedLaptopServiceServer) CreateLaptop(context.Context, *CreateLaptopRequest) (*CreateLaptopResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateLaptop not implemented")
+}
+func (*UnimplementedLaptopServiceServer) UploadLaptopImage(LaptopService_UploadLaptopImageServer) error {
+	return status.Errorf(codes.Unimplemented, "method UploadLaptopImage not implemented")
 }
 
 func RegisterLaptopServiceServer(s *grpc.Server, srv LaptopServiceServer) {
@@ -540,6 +836,32 @@ func _LaptopService_CreateLaptop_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LaptopService_UploadLaptopImage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(LaptopServiceServer).UploadLaptopImage(&laptopServiceUploadLaptopImageServer{stream})
+}
+
+type LaptopService_UploadLaptopImageServer interface {
+	SendAndClose(*UploadImageResponse) error
+	Recv() (*UploadImageRequest, error)
+	grpc.ServerStream
+}
+
+type laptopServiceUploadLaptopImageServer struct {
+	grpc.ServerStream
+}
+
+func (x *laptopServiceUploadLaptopImageServer) SendAndClose(m *UploadImageResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *laptopServiceUploadLaptopImageServer) Recv() (*UploadImageRequest, error) {
+	m := new(UploadImageRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _LaptopService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protobuf.LaptopService",
 	HandlerType: (*LaptopServiceServer)(nil),
@@ -549,6 +871,12 @@ var _LaptopService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _LaptopService_CreateLaptop_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "UploadLaptopImage",
+			Handler:       _LaptopService_UploadLaptopImage_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "laptop.proto",
 }
